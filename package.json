@@ -1,0 +1,30 @@
+{
+  "name": "resume.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "build": "babel src -d lib",
+    "watch": "npm run build --watch",
+    "example": "node example",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "duplexer": "^0.1.1",
+    "highlightjs": "^8.7.0",
+    "marked": "^0.3.5",
+    "mustache": "^2.2.1",
+    "phantomjs-prebuilt": "^2.1.7",
+    "through2": "^2.0.1",
+    "tmp": "0.0.28"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.9.0",
+    "babel-plugin-transform-runtime": "^6.9.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-3": "^6.5.0"
+  }
+}
