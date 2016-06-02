@@ -11,7 +11,7 @@ function createVinylStream(stream, extname) {
     }
 
     (file.isBuffer() ? file : file.contents)
-      .pipe(stream)
+      .pipe(stream())
       .pipe(new BufferList((err, data) => {
         if (err) {
           return done(err);
@@ -27,9 +27,11 @@ function createVinylStream(stream, extname) {
 }
 
 export function html2pdf() {
-  return createVinylStream(resume.html2pdf.apply(this, arguments), '.pdf');
+  return createVinylStream(
+      () => resume.html2pdf.apply(this, arguments), '.pdf');
 }
 
 export function md2html() {
-  return createVinylStream(resume.md2html.apply(this, arguments), '.html');
+  return createVinylStream(
+      () => resume.md2html.apply(this, arguments), '.html');
 }

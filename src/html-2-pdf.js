@@ -24,7 +24,8 @@ export default function ({
   location,
   paperFormat,
   paperBorder,
-  paperOrientation
+  paperOrientation,
+  renderDelay
 } = {}) {
   const instream = through();
   const outstream = through();
@@ -42,7 +43,8 @@ export default function ({
           location || process.cwd(),
           paperFormat || 'A4',
           paperBorder || '2cm',
-          paperOrientation || 'portrait'
+          paperOrientation || 'portrait',
+          renderDelay || 0
         ], async err => {
           if (err) {
             outstream.emit('error', err);
