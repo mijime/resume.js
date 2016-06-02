@@ -18,5 +18,5 @@ md2htmlStream
   .pipe(fs.createWriteStream(path.resolve(__dirname, './test.html')));
 
 md2htmlStream
-  .pipe(resume.html2pdf())
+  .pipe(resume.html2pdf({paperFormat: 'A5'}))
   .pipe(fs.createWriteStream(path.resolve(__dirname, './test.pdf')));
