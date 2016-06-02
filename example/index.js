@@ -9,7 +9,8 @@ var md2htmlStream = fs.createReadStream(path.resolve(__dirname, './test.md'))
       path.resolve(__dirname, './highlight.js')
     ],
     cssPaths: [
-      path.resolve('node_modules/highlightjs/styles/default.css')
+      path.resolve('node_modules/highlightjs/styles/default.css'),
+      path.resolve(__dirname, '../templates/style.css')
     ]
   }));
 

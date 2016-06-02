@@ -12,7 +12,7 @@ const defaultCss = path.resolve(__dirname, '../templates/style.css');
 
 export default function ({templatePath, cssPaths, jsPaths} = {}) {
   const template$ = fsp.node('readFile')(templatePath || defaultTmpl, 'utf8');
-  const styles$ = Promise.all([defaultCss].concat(cssPaths || []).map(async cssPath => {
+  const styles$ = Promise.all((cssPaths || [defaultCss]).map(async cssPath => {
     const content = await fsp.node('readFile')(cssPath, 'utf8');
     return {content};
   }));
