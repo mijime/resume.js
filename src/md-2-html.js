@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import through from 'through2';
+import {obj} from 'through2';
 import marked from 'marked';
 import mustache from 'mustache';
 import Promisify from './promisify';
@@ -22,7 +22,7 @@ export default function ({templatePath, cssPaths, jsPaths} = {}) {
   }));
 
   const markdown = [];
-  const stream = through((buf, enc, done) => {
+  const stream = obj((buf, enc, done) => {
     markdown.push(buf);
     done();
   }, async function (done) {
