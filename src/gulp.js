@@ -27,9 +27,9 @@ function createVinylStream(stream, extname) {
 }
 
 export function html2pdf() {
-  return createVinylStream(resume.html2pdf.call(this, arguments), '.pdf');
+  return createVinylStream(resume.html2pdf.apply(this, arguments), '.pdf');
 }
 
 export function md2html() {
-  return createVinylStream(resume.md2html.call(this, arguments), '.html');
+  return createVinylStream(resume.md2html.apply(this, arguments), '.html');
 }
