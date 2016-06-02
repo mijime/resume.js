@@ -25,13 +25,12 @@ export default function ({templatePath, cssPaths, jsPaths} = {}) {
   const stream = through((buf, enc, done) => {
     markdown.push(buf);
     done();
-
   }, async function (done) {
     const content = marked(markdown.join(''));
     const html = mustache.render(await template$, {
       content,
       styles: await styles$,
-      scripts: await scripts$,
+      scripts: await scripts$
     });
 
     this.push(html);

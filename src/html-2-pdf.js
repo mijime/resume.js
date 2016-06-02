@@ -20,37 +20,35 @@ function createTemp(postfix) {
   });
 }
 
-export default async function({
+export default async function ({
   location,
   paperFormat,
   paperBorder,
-  paperOrientation,
+  paperOrientation
 } = {}) {
   const instream = through();
   const outstream = through();
 
-  const tmpHtmlPath = await createTemp('.html');
-  const tmpPdfPath = await createTemp('.pdf');
-
   instream.pause();
-  instream.pipe(fs.createWriteStream(tmpHtmlPath))
-    .on('finish', () => {
+  const tmpHtmlPath$ = createTemp('.html');
+  const tmpPdfPath$ = createTemp('.pdf');
+  instream.pipe(fs.createWriteStream(await tmpHtmlPath$))
+    .on('finish', async () => {
       const writer = cp.execFile(path.resolve(phantomjs.path), [
-          path.resolve(__dirname, './phantom/render.js'),
-          tmpHtmlPath,
-          tmpPdfPath,
-          location || process.cwd(),
-          paperFormat || 'A4',
-          paperBorder || '2cm',
-          paperOrientation || 'portrait',
-      ], err => {
+        path.resolve(__dirname, './phantom/render.js'),
+        await tmpHtmlPath$,
+        await tmpPdfPath$,
+        location || process.cwd(),
+        paperFormat || 'A4',
+        paperBorder || '2cm',
+        paperOrientation || 'portrait'
+      ], async err => {
         if (err) {
           outstream.emit('error', err);
           return;
         }
-        fs.createReadStream(tmpPdfPath).pipe(outstream);
+        fs.createReadStream(await tmpPdfPath$).pipe(outstream);
       });
-
       writer.stdout.pipe(process.stdout);
       writer.stderr.pipe(process.stderr);
     });

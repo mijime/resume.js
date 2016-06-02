@@ -1,6 +1,6 @@
+import fs from 'fs';
 import system from 'system';
 import webpage from 'webpage';
-import fs from 'fs';
 
 try {
   const page = webpage.create();
@@ -18,7 +18,7 @@ try {
     'paperFormat',
     'paperOrientation',
     'paperBorder',
-    'renderDelay',
+    'renderDelay'
   ].reduce((args, name, i) => {
     args[name] = system.args[i + 1];
     return args;
@@ -29,15 +29,14 @@ try {
   page.paperSize = {
     format: args.paperFormat,
     border: args.paperBorder,
-    orientation: args.paperOrientation,
+    orientation: args.paperOrientation
   };
 
   page.onLoadFinished = () => {
     page.render(args.output);
     page.close();
     phantom.exit();
-  }
-
+  };
 } catch (err) {
   console.log('phantom::main::error', err);
   phantom.exit(2);
