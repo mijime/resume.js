@@ -16,8 +16,8 @@ try {
     'output',
     'location',
     'paperFormat',
-    'paperOrientation',
     'paperBorder',
+    'paperOrientation',
     'renderDelay'
   ].reduce((args, name, i) => {
     args[name] = system.args[i + 1];
